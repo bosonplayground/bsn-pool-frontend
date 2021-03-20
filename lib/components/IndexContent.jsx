@@ -34,10 +34,11 @@ const demoAssetTypes = {
   dai: { label: 'DAI', logo: DaiSvg },
   uni: { label: 'UNI Stake' },
   usdc: { label: 'USDC', logo: UsdcSvg },
-  usdt: { label: 'USDT', logo: UsdtSvg }
+  usdt: { label: 'USDT', logo: UsdtSvg },
+  bosonx: { label: 'BosonX', logo: UsdtSvg }
 }
 const demoPools = {
-  rinkeby: { chainId: 4, assets: ['dai', 'usdc', 'usdt'] }
+  rinkeby: { chainId: 4, assets: ['dai', 'usdc', 'usdt', 'bosonx'] }
 }
 
 export const IndexContent = (props) => {

@@ -4,6 +4,7 @@ import FeatherIcon from 'feather-icons-react'
 
 import { NETWORKS } from 'lib/constants'
 import { WalletContext } from 'lib/components/WalletContextProvider'
+import { Button } from 'lib/components/Button'
 import { networkColorClassname } from 'lib/utils/networkColorClassname'
 import { chainIdToName } from 'lib/utils/chainIdToName'
 import { shorten } from 'lib/utils/shorten'
@@ -40,9 +41,17 @@ export const WalletInfo = () => {
     )
   }
 
+  const handleClick = (e) => {
+    e.preventDefault()
+
+    // handleRedeem() TODO:
+  }
+
   if (address && walletName) {
+    // TODO: only show Redeem if Wallet contains CommitmentTokens
     innerContent = (
       <>
+        <Button onClick={handleClick}>Redeem Physical Item(s)</Button>
         <div className='leading-snug text-highlight-3 trans'>
           <span className='text-highlight-3 hover:text-highlight-1 overflow-ellipsis block w-full no-underline'>
             {shorten(address)}

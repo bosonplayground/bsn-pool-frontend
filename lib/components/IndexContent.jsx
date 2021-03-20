@@ -16,6 +16,7 @@ import { getDemoPoolContractAddress } from 'lib/utils/getDemoPoolContractAddress
 import { shorten } from 'lib/utils/shorten'
 import { useAllCreatedPrizePoolsWithTokens } from 'lib/hooks/useAllCreatedPrizePoolsWithTokens'
 import { useAllUserTokenBalances } from 'lib/hooks/useAllUserTokenBalances'
+import { useBosonTokenBalances } from 'lib/hooks/useBosonTokenBalances'
 import { getPrecision, numberWithCommas } from 'lib/utils/numberWithCommas'
 import { useNetwork } from 'lib/hooks/useNetwork'
 import { CheckboxInputGroup } from 'lib/components/CheckboxInputGroup'
@@ -56,22 +57,41 @@ const PoolsLists = () => {
     isFetched: tokenBalancesIsFetched,
     isFetching: tokenBalancedIsFetching
   } = useAllUserTokenBalances()
+  const {
+    data: bosonTokenBalances,
+    isFetched: bosonTokenBalancesIsFetched,
+    isFetching: bosonTokenBalancedIsFetching
+  } = useBosonTokenBalances()
 
   if (
     !createdPrizePoolsIsFetched ||
     !tokenBalancesIsFetched ||
+    !bosonTokenBalancesIsFetched ||
     tokenBalancedIsFetching ||
-    createdPrizePoolsIsFetching
+    createdPrizePoolsIsFetching ||
+    bosonTokenBalancedIsFetching
   ) {
     return <PoolTogetherLoading />
   }
 
   return (
     <>
-      <UsersPoolsCard createdPrizePools={createdPrizePools} tokenBalances={tokenBalances} />
-      <GovernancePoolsCard createdPrizePools={createdPrizePools} tokenBalances={tokenBalances} />
+      <UsersPoolsCard
+        createdPrizePools={createdPrizePools}
+        tokenBalances={tokenBalances}
+        bosonTokenBalances={bosonTokenBalances}
+      />
+      <GovernancePoolsCard
+        createdPrizePools={createdPrizePools}
+        tokenBalances={tokenBalances}
+        bosonTokenBalances={bosonTokenBalances}
+      />
       <DemoPoolsCard />
-      <AllPoolsCard createdPrizePools={createdPrizePools} tokenBalances={tokenBalances} />
+      <AllPoolsCard
+        createdPrizePools={createdPrizePools}
+        tokenBalances={tokenBalances}
+        bosonTokenBalances={bosonTokenBalances}
+      />
       <ReferencePoolCard />
       <BuilderCard />
     </>

@@ -24,7 +24,7 @@ export const Card = (props) => {
 export const InnerCard = (props) => (
   <div
     className={classnames(
-      'mx-auto px-8 sm:px-12 py-4 bg-purple-800 bg-opacity-20 rounded-xl width-fit-content',
+      'mx-auto px-8 sm:px-12 py-4 rounded-xl width-fit-content',
       props.className
     )}
   >

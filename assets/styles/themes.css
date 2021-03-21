@@ -1,11 +1,11 @@
 .theme-dark {
-  --color-bg-body: #290b5a;
-  --color-bg-card: #341762;
+  --color-bg-body: #000000;
+  --color-bg-card: #000000;
   --color-bg-card-selected: #43286e;
   --color-bg-primary: #290b5a;
-  --color-bg-secondary: #4c249f;
+  --color-bg-secondary: #000000;
   --color-bg-tertiary: rgba(255, 255, 255, 0.05);
-  --color-bg-default: #341762;
+  --color-bg-default: #141C24;
   --color-bg-darkened: #1a083a;
   --color-bg-inverse: #fff;
   --color-bg-overlay: rgba(0, 0, 0, 0.7);
@@ -28,19 +28,19 @@
   --color-bg-teal: #0ea3a4;
   --color-bg-purple-1: #401c94;
 
-  --color-text-accent-1: #bbb2ce;
+  --color-text-accent-1: #c1c7ce;
   --color-text-accent-2: #bbb2ce;
-  --color-text-accent-3: #9f82d7;
+  --color-text-accent-3: #ffffff;
   --color-text-primary: #4c249f;
   --color-text-primary-soft: #6458af;
   --color-text-secondary: #4c249f;
-  --color-text-default: #a472f7;
+  --color-text-default: #ffffff;
   --color-text-default-soft: #7458df;
   --color-text-inverse: #fff;
   --color-text-match: #111;
   --color-text-black: #111;
   --color-text-highlight-1: #1ef7d6;
-  --color-text-highlight-2: #35f0d0;
+  --color-text-highlight-2: #29F6A7;
   --color-text-highlight-3: #55f1d7;
   --color-text-whitesmoke: rgba(245, 245, 245, 0.6);
   --color-text-red-1: #e61b1b;

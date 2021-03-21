@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export const Meta = (props) => {
   let { title } = props
-  const defaultTitle = 'PoolTogether - Community Pools'
+  const defaultTitle = 'BosonPool - Redeemable Prize Pools'
   title = title ? `${title} - ${defaultTitle}` : defaultTitle
 
   const url = `https://community.pooltogether.com`

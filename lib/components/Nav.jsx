@@ -5,8 +5,7 @@ import { ConnectWalletButton } from 'lib/components/ConnectWalletButton'
 import { WalletContext } from 'lib/components/WalletContextProvider'
 import { WalletInfo } from 'lib/components/WalletInfo'
 
-import PoolLogo from 'assets/images/pooltogether-logo.svg'
-import PoolPLogo from 'assets/images/pooltogether-white-mark.svg'
+import BOSONPoolLogo from 'assets/images/bosonpool-white-mark.svg'
 
 export const Nav = (props) => {
   const walletContext = useContext(WalletContext)
@@ -26,14 +25,9 @@ export const Nav = (props) => {
             <Link href='/' as='/'>
               <a title={'Back to home'} className='border-0'>
                 <img
-                  alt={`PoolTogether Logo`}
-                  src={PoolLogo}
-                  className='mr-auto lg:m-0 w-32 hidden sm:block'
-                />
-                <img
-                  alt={`PoolTogether P Logo`}
-                  src={PoolPLogo}
-                  className='mr-auto lg:m-0 w-6 block sm:hidden'
+                  alt={`BOSON POOL Logo`}
+                  src={BOSONPoolLogo}
+                  className='mr-auto lg:m-0 w-32'
                 />
               </a>
             </Link>

@@ -58,7 +58,10 @@ export const WalletInfo = () => {
     const { onRedeem } = useRedeem()
 
     try {
-      const newTx = await onRedeem(signer, id)
+      const newTx = await onRedeem(
+        signer,
+        '57896044618658097711785492504343953927655839433583097410118915826251869454337' // TODO: this ID has been redeemed
+      )
       setTx((tx) => ({
         ...tx,
         hash: newTx.hash,
@@ -89,7 +92,7 @@ export const WalletInfo = () => {
     const { onMintAndCommit } = useMintAndCommit()
 
     try {
-      const newTx = await onMintAndCommit(signer, address)
+      const newTx = await onMintAndCommit(signer, address, provider)
       setTx((tx) => ({
         ...tx,
         hash: newTx.hash,
@@ -97,7 +100,7 @@ export const WalletInfo = () => {
         sent: true
       }))
 
-      await newTx.wait()
+      // await newTx.wait()
 
       setTx((tx) => ({
         ...tx,

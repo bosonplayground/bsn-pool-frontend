@@ -51,6 +51,12 @@ export default [
         internalType: 'uint8',
         name: '_paymentType',
         type: 'uint8'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: '_correlationId',
+        type: 'uint256'
       }
     ],
     name: 'LogOrderCreated',
@@ -128,6 +134,26 @@ export default [
         internalType: 'address',
         name: '',
         type: 'address'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address'
+      }
+    ],
+    name: 'correlationIds',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
       }
     ],
     stateMutability: 'view',

@@ -10,6 +10,7 @@ import { chainIdToName } from 'lib/utils/chainIdToName'
 import { shorten } from 'lib/utils/shorten'
 
 import { useRedeem } from '../hooks/useRedeem'
+import { useMintAndCommit } from '../hooks/useMintAndCommit'
 
 export const WalletInfo = () => {
   const walletContext = useContext(WalletContext)
@@ -50,7 +51,7 @@ export const WalletInfo = () => {
     )
   }
 
-  const handleClick = async (e, id) => {
+  const handleRedeemClick = async (e, id) => {
     e.preventDefault()
     const provider = walletContext.state.provider
     const signer = provider.getSigner()
@@ -81,11 +82,43 @@ export const WalletInfo = () => {
     }
   }
 
+  const handleMintClick = async (e) => {
+    e.preventDefault()
+    const provider = walletContext.state.provider
+    const signer = provider.getSigner()
+    const { onMintAndCommit } = useMintAndCommit()
+
+    try {
+      const newTx = await onMintAndCommit(signer, address)
+      setTx((tx) => ({
+        ...tx,
+        hash: newTx.hash,
+        inWallet: false,
+        sent: true
+      }))
+
+      await newTx.wait()
+
+      setTx((tx) => ({
+        ...tx,
+        completed: true
+      }))
+    } catch (e) {
+      console.log(e)
+      setTx((tx) => ({
+        ...tx,
+        completed: true,
+        error: true
+      }))
+    }
+  }
+
   if (address && walletName) {
     // TODO: only show Redeem if Wallet contains CommitmentTokens
     innerContent = (
       <>
-        <Button onClick={handleClick}>Redeem Physical Item(s)</Button>
+        <Button onClick={handleMintClick}>Gift a Physical Item</Button>
+        <Button onClick={handleRedeemClick}>Redeem Physical Item(s)</Button>
         <div className='leading-snug text-highlight-3 trans'>
           <span className='text-highlight-3 hover:text-highlight-1 overflow-ellipsis block w-full no-underline'>
             {shorten(address)}

@@ -57,7 +57,7 @@ export const WalletInfo = () => {
     const { onRedeem } = useRedeem()
 
     try {
-      const newTx = await onRedeem(signer, 1)
+      const newTx = await onRedeem(signer, id)
       setTx((tx) => ({
         ...tx,
         hash: newTx.hash,

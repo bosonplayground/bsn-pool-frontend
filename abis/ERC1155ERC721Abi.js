@@ -293,11 +293,6 @@ export default [
         type: 'uint256'
       },
       {
-        internalType: 'uint256',
-        name: '_value',
-        type: 'uint256'
-      },
-      {
         internalType: 'bytes',
         name: '_data',
         type: 'bytes'
@@ -323,6 +318,11 @@ export default [
       {
         internalType: 'uint256',
         name: '_tokenId',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_value',
         type: 'uint256'
       },
       {
@@ -579,9 +579,33 @@ export default [
         type: 'bool'
       }
     ],
-    stateMutability: 'view',
+    stateMutability: 'pure',
     type: 'function',
     constant: true
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256'
+      }
+    ],
+    name: 'mint',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
+      }
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function'
   },
   {
     inputs: [
@@ -608,30 +632,6 @@ export default [
     ],
     name: 'mint',
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address'
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256'
-      }
-    ],
-    name: 'mint',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool'
-      }
-    ],
     stateMutability: 'nonpayable',
     type: 'function'
   },
@@ -718,6 +718,32 @@ export default [
       }
     ],
     name: '_setMetadataBase',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'string',
+        name: '_newRoute',
+        type: 'string'
+      }
+    ],
+    name: '_set1155Route',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'string',
+        name: '_newRoute',
+        type: 'string'
+      }
+    ],
+    name: '_set721Route',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function'
@@ -815,19 +841,5 @@ export default [
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function'
-  },
-  {
-    inputs: [],
-    name: 'getBosonRouterAddress',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true
   }
 ]

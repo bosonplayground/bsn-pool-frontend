@@ -7,7 +7,6 @@ import { ButtonRelativeLink } from 'lib/components/ButtonRelativeLink'
 import { Card, CardTitle } from 'lib/components/Card'
 import { LoadingDots } from 'lib/components/LoadingDots'
 import { NewPrizeCountdown } from 'lib/components/NewPrizeCountdown'
-import { useCoingeckoTokenData } from 'lib/hooks/useCoingeckoTokenData'
 import { useAwardsList } from 'lib/hooks/useAwardsList'
 import { RelativeInternalLink } from 'lib/components/RelativeInternalLink'
 import { poolChainValuesAtom } from 'lib/hooks/usePoolChainValues'
@@ -67,7 +66,7 @@ export const PrizeCard = (props) => {
 const PrizeSection = (props) => {
   const { awards, loading } = useAwardsList()
 
-  const awardsWithBalances = useMemo(() => awards.filter((token) => !token.balance.isZero()), [
+  const awardsWithBalances = useMemo(() => awards.filter((token) => !token.balance?.isZero()), [
     awards
   ])
 
@@ -114,7 +113,7 @@ const Prizes = (props) => {
   }
 
   return (
-    <ul className='flex flex-col max-w-xs mx-auto' style={{ minWidth: '190px' }}>
+    <ul className='flex flex-col mx-auto' style={{ minWidth: '190px' }}>
       {awards.map((token, index) => {
         return <PrizeListItem small={awards.length > 6} key={index} token={token} index={index} />
       })}
@@ -124,14 +123,9 @@ const Prizes = (props) => {
 
 const SinglePrizeItem = (props) => {
   const { token } = props
-  const { data: tokenData } = useCoingeckoTokenData(token.address)
-  const imageUrl = tokenData?.image?.large
 
   return (
     <div className={'flex mx-auto my-2 sm:mt-0 sm:mb-2 leading-none'}>
-      {imageUrl && (
-        <img src={imageUrl} className='w-8 h-8 sm:w-16 sm:h-16 mr-4 my-auto rounded-full' />
-      )}
       <span className='font-bold text-6xl sm:text-9xl mr-4 my-auto text-flashy'>
         {token.formattedBalance}
       </span>
@@ -143,8 +137,30 @@ const SinglePrizeItem = (props) => {
 const PrizeListItem = (props) => {
   const { token, small } = props
   const index = props.index || 0
-  const { data: tokenData } = useCoingeckoTokenData(token.address)
-  const imageUrl = tokenData?.image?.small
+  console.log(token, 'ss')
+
+  if (token.symbol) {
+    return (
+      <li key={index + token.symbol} className='flex w-full justify-between mb-2'>
+        <span
+          className={classnames('font-bold text-flashy leading-none', {
+            'text-md sm:text-xl': small,
+            'text-xl sm:text-5xl': !small
+          })}
+        >
+          {token.formattedBalance}
+        </span>
+        <div
+          className={classnames('flex ml-4 mt-auto', {
+            'text-sm sm:text-lg': small,
+            'text-lg sm:text-3xl': !small
+          })}
+        >
+          <span className='leading-none mt-auto'>{token.symbol || token.name || ''}</span>
+        </div>
+      </li>
+    )
+  }
 
   return (
     <li key={index + token.symbol} className='flex w-full justify-between mb-2'>
@@ -154,7 +170,7 @@ const PrizeListItem = (props) => {
           'text-xl sm:text-5xl': !small
         })}
       >
-        {token.formattedBalance}
+        BOSON COMMITMENT TOKEN
       </span>
       <div
         className={classnames('flex ml-4 mt-auto', {
@@ -162,8 +178,7 @@ const PrizeListItem = (props) => {
           'text-lg sm:text-3xl': !small
         })}
       >
-        {imageUrl && <img className='my-auto mr-2 w-6 h-6 rounded-full' src={imageUrl} />}
-        <span className='leading-none mt-auto'>{token.symbol || token.name || ''}</span>
+        <span className='leading-none mt-auto'>BSV</span>
       </div>
     </li>
   )

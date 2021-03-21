@@ -137,7 +137,6 @@ const SinglePrizeItem = (props) => {
 const PrizeListItem = (props) => {
   const { token, small } = props
   const index = props.index || 0
-  console.log(token, 'ss')
 
   if (token.symbol) {
     return (

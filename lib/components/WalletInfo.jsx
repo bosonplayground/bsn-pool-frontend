@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import classnames from 'classnames'
 import FeatherIcon from 'feather-icons-react'
 
@@ -9,10 +9,19 @@ import { networkColorClassname } from 'lib/utils/networkColorClassname'
 import { chainIdToName } from 'lib/utils/chainIdToName'
 import { shorten } from 'lib/utils/shorten'
 
+import { useRedeem } from '../hooks/useRedeem'
+
 export const WalletInfo = () => {
   const walletContext = useContext(WalletContext)
   const { _onboard } = walletContext || {}
   const currentState = _onboard.getState()
+
+  const [tx, setTx] = useState({})
+
+  const resetState = (e) => {
+    e.preventDefault()
+    setTx({})
+  }
 
   let address
   let walletName
@@ -41,10 +50,35 @@ export const WalletInfo = () => {
     )
   }
 
-  const handleClick = (e) => {
+  const handleClick = async (e, id) => {
     e.preventDefault()
+    const provider = walletContext.state.provider
+    const signer = provider.getSigner()
+    const { onRedeem } = useRedeem()
 
-    // handleRedeem() TODO:
+    try {
+      const newTx = await onRedeem(signer, 1)
+      setTx((tx) => ({
+        ...tx,
+        hash: newTx.hash,
+        inWallet: false,
+        sent: true
+      }))
+
+      await newTx.wait()
+
+      setTx((tx) => ({
+        ...tx,
+        completed: true
+      }))
+    } catch (e) {
+      console.log(e)
+      setTx((tx) => ({
+        ...tx,
+        completed: true,
+        error: true
+      }))
+    }
   }
 
   if (address && walletName) {
